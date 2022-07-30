@@ -3,13 +3,13 @@ import IMatch from '../interfaces/IMatch';
 import MatchesService from '../services/matchesService';
 
 class MatchesController {
-  constructor(private service = new MatchesService()) {  }
+  constructor(private service = new MatchesService()) { }
 
   getAll = async (req: Request, res: Response) => {
     const { inProgress } = req.query;
 
     if (inProgress !== undefined) {
-      const inProgressBool = inProgress === 'true' ? true: false;
+      const inProgressBool = inProgress === 'true';
       const { status, data } = await this.service.getAllInProgress(inProgressBool);
       return res.status(status).json(data);
     }
@@ -24,7 +24,7 @@ class MatchesController {
       homeTeam,
       awayTeam,
       homeTeamGoals,
-      awayTeamGoals
+      awayTeamGoals,
     );
 
     return res.status(status).json(data);
