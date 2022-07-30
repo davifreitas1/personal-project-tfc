@@ -1,4 +1,4 @@
-import Teams from "../database/models/Teams";
+import Teams from '../database/models/Teams';
 
 class TeamsService {
   constructor(private model = Teams) { }
@@ -9,7 +9,7 @@ class TeamsService {
     return {
       status: 200,
       data: teams,
-    }
+    };
   }
 
   async getOne(id: number) {
