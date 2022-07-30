@@ -1,17 +1,7 @@
 import * as express from 'express';
-import LoginController from './controllers/loginController';
-import MatchesController from './controllers/matchesController';
-import TeamsController from './controllers/teamsController';
-import LoginValidation from './middlewares/loginValidation';
-import MatchesValidation from './middlewares/matchesValidation';
-import TokenValidation from './middlewares/tokenValidation';
-
-const loginValidation = new LoginValidation();
-const tokenValidation = new TokenValidation();
-const matchesValidation = new MatchesValidation();
-const loginController = new LoginController();
-const teamsController = new TeamsController();
-const matchesController = new MatchesController();
+import loginRouter from './routers/loginRouter';
+import matchesRouter from './routers/matchesRouter';
+import teamsRouter from './routers/teamsRouter';
 
 class App {
   public app: express.Express;
@@ -36,14 +26,9 @@ class App {
     this.app.use(express.json());
     this.app.use(accessControl);
 
-    this.app.post('/login', loginValidation.validation, loginController.login);
-    this.app.get('/login/validate', loginController.role);
-    this.app.get('/teams', teamsController.getAll);
-    this.app.get('/teams/:id', teamsController.getOne);
-    this.app.get('/matches', matchesController.getAll);
-    this.app.patch('/matches/:id/finish', matchesController.finish);
-    this.app.post('/matches', matchesValidation.validate, tokenValidation.validation, matchesController.create);
-    this.app.patch('/matches/:id', matchesController.updateGoals);
+    this.app.use('/login', loginRouter);
+    this.app.use('/teams', teamsRouter);
+    this.app.use('/matches', matchesRouter);
   }
 
   public start(PORT: string | number):void {
