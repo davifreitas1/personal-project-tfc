@@ -42,9 +42,9 @@ class MatchesController {
     const { id } = req.params;
     const { homeTeamGoals, awayTeamGoals } = req.body as IMatch;
     const idNumber = Number(id);
-    const { status } = await this.service.updateGoals(idNumber, homeTeamGoals, awayTeamGoals);
+    const { status, data } = await this.service.updateGoals(idNumber, homeTeamGoals, awayTeamGoals);
 
-    res.status(status).json();
+    res.status(status).json(data);
   };
 }
 
