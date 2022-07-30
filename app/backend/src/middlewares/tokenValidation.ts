@@ -3,7 +3,7 @@ import GenerateToken from '../util/generateToken';
 import Users from '../database/models/Users';
 
 class TokenValidation {
-  constructor(private generateToken = new GenerateToken) { }
+  constructor(private generateToken = new GenerateToken()) { }
 
   validation = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;

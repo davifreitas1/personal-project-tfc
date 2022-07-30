@@ -1,9 +1,11 @@
 import Teams from "../database/models/Teams";
 
 class TeamsService {
+  constructor(private model = Teams) { }
+
   async getAll() {
-    const teams = await Teams.findAll();
-    
+    const teams = await this.model.findAll();
+
     return {
       status: 200,
       data: teams,
@@ -11,7 +13,7 @@ class TeamsService {
   }
 
   async getOne(id: number) {
-    const team = await Teams.findOne({ where: { id } });
+    const team = await this.model.findOne({ where: { id } });
 
     return {
       status: 200,

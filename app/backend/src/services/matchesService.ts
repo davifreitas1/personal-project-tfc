@@ -1,27 +1,21 @@
-import Teams from "../database/models/Teams";
-import Matches from "../database/models/Matches";
+import Teams from '../database/models/Teams';
+import Matches from '../database/models/Matches';
 
 class MatchesService {
+  constructor(private model = Matches) { }
+
   async getAll() {
-    const matches = await Matches.findAll(
+    const matches = await this.model.findAll(
       {
         include: [
           {
-            model: Teams,
-            as: 'teamHome',
-            attributes: {
-              exclude: ['id'],
-            },
+            model: Teams, as: 'teamHome', attributes: { exclude: ['id'] },
           },
           {
-            model: Teams,
-            as: 'teamAway',
-            attributes: {
-              exclude: ['id'],
-            },
+            model: Teams, as: 'teamAway', attributes: { exclude: ['id'] },
           },
         ],
-      }
+      },
     );
 
     return {
@@ -31,28 +25,18 @@ class MatchesService {
   }
 
   async getAllInProgress(inProgress: boolean) {
-    const matches = await Matches.findAll(
+    const matches = await this.model.findAll(
       {
         include: [
           {
-            model: Teams,
-            as: 'teamHome',
-            attributes: {
-              exclude: ['id'],
-            },
+            model: Teams, as: 'teamHome', attributes: { exclude: ['id'] },
           },
           {
-            model: Teams,
-            as: 'teamAway',
-            attributes: {
-              exclude: ['id'],
-            },
+            model: Teams, as: 'teamAway', attributes: { exclude: ['id'] },
           },
         ],
-        where: {
-          inProgress,
-        }
-      }
+        where: { inProgress },
+      },
     );
 
     return {
@@ -62,19 +46,19 @@ class MatchesService {
   }
 
   async create(
-      homeTeam: number,
-      awayTeam: number,
-      homeTeamGoals: number,
-      awayTeamGoals: number,
-    ) {
-    const match = await Matches.create(
+    homeTeam: number,
+    awayTeam: number,
+    homeTeamGoals: number,
+    awayTeamGoals: number,
+  ) {
+    const match = await this.model.create(
       {
         homeTeam,
         awayTeam,
         homeTeamGoals,
         awayTeamGoals,
         inProgress: true,
-      }
+      },
     );
 
     return {
@@ -84,18 +68,18 @@ class MatchesService {
   }
 
   async finish(id: number) {
-    await Matches.update({ inProgress: false }, { where: { id } });
+    await this.model.update({ inProgress: false }, { where: { id } });
 
     return {
       status: 200,
       data: {
         message: 'Finished',
-      }
+      },
     };
   }
 
   async updateGoals(id: number, homeTeamGoals: number, awayTeamGoals: number) {
-    await Matches.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+    await this.model.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
 
     return {
       status: 200,
