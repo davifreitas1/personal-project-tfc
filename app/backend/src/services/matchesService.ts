@@ -62,10 +62,10 @@ class MatchesService {
   }
 
   async create(
-    homeTeam: number,
-    awayTeam: number,
-    homeTeamGoals: number,
-    awayTeamGoals: number,
+      homeTeam: number,
+      awayTeam: number,
+      homeTeamGoals: number,
+      awayTeamGoals: number,
     ) {
     const match = await Matches.create(
       {

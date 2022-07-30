@@ -41,13 +41,8 @@ class App {
     this.app.get('/teams', teamsController.getAll);
     this.app.get('/teams/:id', teamsController.getOne);
     this.app.get('/matches', matchesController.getAll);
-    this.app.post(
-      '/matches',
-      matchesValidation.validate,
-      tokenValidation.validation,
-      matchesController.create
-    );
     this.app.patch('/matches/:id/finish', matchesController.finish);
+    this.app.post('/matches', matchesValidation.validate, tokenValidation.validation, matchesController.create);
     this.app.patch('/matches/:id', matchesController.updateGoals);
   }
 
