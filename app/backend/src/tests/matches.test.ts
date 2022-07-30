@@ -187,7 +187,7 @@ describe('Testa a rota /matches com método post', () => {
       }
     );
 
-    expect(chaiHttpResponse.status).to.be.equal(400);
+    expect(chaiHttpResponse.status).to.be.equal(401);
     expect(chaiHttpResponse.body).to.have.property('message');
     expect(chaiHttpResponse.body.message).to.be.equal(EQUAL_TEAMS);
   });
