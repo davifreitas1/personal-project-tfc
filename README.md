@@ -19,7 +19,7 @@ Também tentei implementar alguns conceitos de arquitetura de software, como o m
 
 
 
-É preciso utilizar uma máquina de distribuição Unix e ter o node instalado para executar o comando "npm install". Após isso, com ajuda do Docker, é possível rodar o comando "npm run compose:up" para subir os containers necessários que inicializaram o servidor back-end, configurado para rodar na porta 3001.
+É preciso utilizar uma máquina de distribuição Unix e ter o node instalado para executar o comando "npm install". Após isso, com ajuda do Docker, é possível rodar o comando "npm run compose:up" para subir os containers necessários que inicializarão o servidor back-end, configurado para rodar na porta 3001.
 Serão inicializados 3 containers, um para o front-end, outro para o back-end e o banco de dados. Para conferir a aplicação em andamento, basta ir até o localhost:3000, onde o React
 será executado e você poderá interagir com a aplicação.
 
