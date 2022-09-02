@@ -1,4 +1,4 @@
-# Projeto MongoDB Car Shop #
+# Projeto Trybe Futebol Clube #
 
 ## Descrição ##
 
